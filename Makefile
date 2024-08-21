@@ -6,7 +6,7 @@
 #    By: vdarsuye <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 14:29:48 by vdarsuye          #+#    #+#              #
-#    Updated: 2024/08/21 14:58:07 by vdarsuye         ###   ########.fr        #
+#    Updated: 2024/08/21 15:58:32 by vdarsuye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ NAME = libftprintf.a
 
 
 #Colors
+
 RESET = \033[0m
 RED = \033[31m
 GREEN = \033[32m
@@ -31,7 +32,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 # Vars and Files
 
-SRC =   ft_printf.c print_char.c print_str.c print_int.c /
+SRC = ft_printf.c print_char.c print_str.c print_int.c \
 	print_unsigned.c print_hexa.c print_pointer.c
 
 OBJ = $(SRC:.c=.o)
