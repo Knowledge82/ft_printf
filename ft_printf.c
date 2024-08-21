@@ -6,7 +6,7 @@
 /*   By: vdarsuye <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:52:16 by vdarsuye          #+#    #+#             */
-/*   Updated: 2024/08/21 14:46:15 by vdarsuye         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:53:07 by vdarsuye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,17 @@ void	ft_check(va_list params, char c, int *len)
 
 int	ft_printf(const char *str, ...)
 {
-	int	len;
+	int		len;
 	va_list	params;
 
 	va_start(params, str);
 	len = 0;
-
-	while(*str)
+	while (*str)
 	{
-		if(*str == '%')
+		if (*str == '%')
 		{
 			str++;
-			if(*str)
+			if (*str)
 			{
 				ft_check(params, *str, &len);
 				str++;
