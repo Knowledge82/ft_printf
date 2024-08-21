@@ -6,13 +6,13 @@
 /*   By: vdarsuye <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 15:39:03 by vdarsuye          #+#    #+#             */
-/*   Updated: 2024/08/15 15:43:14 by vdarsuye         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:29:39 by vdarsuye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_hexa(unsigned int nb, const char c, int *len)
+void	print_hexa(unsigned long long nb, const char c, int *len)
 {
 	char	*base;
 
