@@ -6,7 +6,7 @@
 /*   By: vdarsuye <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:24:34 by vdarsuye          #+#    #+#             */
-/*   Updated: 2024/08/21 14:37:14 by vdarsuye         ###   ########.fr       */
+/*   Updated: 2024/09/08 15:23:32 by vdarsuye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	print_str(char *str, int *len)
 {
-	if (!*str)
-		str = "(null)";
+	if (str == NULL)
+		return (print_str("(null)", len));
 	while (*str)
 	{
 		print_char(*str, len);
