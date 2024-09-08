@@ -6,30 +6,21 @@
 /*   By: vdarsuye <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 15:39:03 by vdarsuye          #+#    #+#             */
-/*   Updated: 2024/08/21 16:29:39 by vdarsuye         ###   ########.fr       */
+/*   Updated: 2024/09/08 15:12:46 by vdarsuye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_hexa(unsigned long long nb, const char c, int *len)
+void	print_hexa(unsigned int nb, const char c, int *len)
 {
 	char	*base;
 
-	if (nb == 0)
-		print_char('0', len);
+	if (c == 'x')
+		base = "0123456789abcdef";
 	else
-	{
-		if (c == 'x')
-			base = "0123456789abcdef";
-		else
-			base = "0123456789ABCDEF";
-		if (nb >= 16)
-		{
-			print_hexa((nb / 16), c, len);
-			print_hexa((nb % 16), c, len);
-		}
-		else
-			print_char(base[nb], len);
-	}
+		base = "0123456789ABCDEF";
+	if (nb >= 16)
+		print_hexa((nb / 16), c, len);
+	print_char(base[nb % 16], len);
 }

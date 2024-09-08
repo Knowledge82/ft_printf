@@ -6,7 +6,7 @@
 /*   By: vdarsuye <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:52:16 by vdarsuye          #+#    #+#             */
-/*   Updated: 2024/08/21 15:53:07 by vdarsuye         ###   ########.fr       */
+/*   Updated: 2024/09/08 15:15:54 by vdarsuye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_check(va_list params, char c, int *len)
 	else if (c == 's')
 		print_str(va_arg(params, char *), len);
 	else if (c == 'p')
-		print_pointer(va_arg(params, void *), len);
+		print_pointer(va_arg(params, unsigned long), len);
 	else if (c == 'd' || c == 'i')
 		print_int(va_arg(params, int), len);
 	else if (c == 'u')
@@ -33,26 +33,22 @@ void	ft_check(va_list params, char c, int *len)
 int	ft_printf(const char *str, ...)
 {
 	int		len;
+	int		i;
 	va_list	params;
 
 	va_start(params, str);
 	len = 0;
-	while (*str)
+	i = 0;
+	while (str[i] != '\0')
 	{
-		if (*str == '%')
+		if (str[i] == '%')
 		{
-			str++;
-			if (*str)
-			{
-				ft_check(params, *str, &len);
-				str++;
-			}
+			if (str[i + 1] != '\0')
+				ft_check(params, str[++i], &len);
 		}
 		else
-		{
-			print_char(*str, &len);
-			str++;
-		}
+			print_char(str[i], &len);
+		i++;
 	}
 	va_end(params);
 	return (len);

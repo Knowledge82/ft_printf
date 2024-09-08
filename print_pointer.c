@@ -6,18 +6,15 @@
 /*   By: vdarsuye <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 12:09:26 by vdarsuye          #+#    #+#             */
-/*   Updated: 2024/08/21 16:43:10 by vdarsuye         ###   ########.fr       */
+/*   Updated: 2024/09/08 15:14:49 by vdarsuye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_pointer(void *ptr, int *len)
+void	print_pointer(unsigned long ptr, int *len)
 {
-	unsigned long long	address;
-
-	address = (unsigned long long)ptr;
-	if (address == 0)
+	if (ptr == '\0')
 	{
 		print_str("(nil)", len);
 		return ;
@@ -25,6 +22,6 @@ void	print_pointer(void *ptr, int *len)
 	else
 	{
 		print_str("0x", len);
-		print_hexa(address, 'x', len);
+		print_hexa(ptr, 'x', len);
 	}
 }

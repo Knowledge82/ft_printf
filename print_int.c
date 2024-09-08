@@ -6,7 +6,7 @@
 /*   By: vdarsuye <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:47:46 by vdarsuye          #+#    #+#             */
-/*   Updated: 2024/08/21 15:25:57 by vdarsuye         ###   ########.fr       */
+/*   Updated: 2024/09/08 15:06:57 by vdarsuye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_int(int nb, int *len)
 	if (nb < 0)
 	{
 		print_char('-', len);
-		nb = -nb;
+		nb *= -1;
 	}
 	if (nb >= 10)
 		print_int(nb / 10, len);
