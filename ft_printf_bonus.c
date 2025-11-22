@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdarsuye <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 12:52:16 by vdarsuye          #+#    #+#             */
-/*   Updated: 2025/11/22 15:28:03 by vdarsuye         ###   ########.fr       */
+/*   Created: 2025/11/22 16:00:13 by vdarsuye          #+#    #+#             */
+/*   Updated: 2025/11/22 16:06:57 by vdarsuye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_check(va_list params, char c, int *len)
+void	ft_check_with_flags(va_list params, char c, t_flags *flags, int *len)
 {
 	if (c == 'c')
-		print_char(va_arg(params, int), len);
+		print_char_with_flags(va_arg(params, int), flags, len);
 	else if (c == 's')
 		print_str(va_arg(params, char *), len);
 	else if (c == 'p')
@@ -43,12 +43,19 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			if (str[i + 1] != '\0')// тут где-то parse_flags
-				ft_check(params, str[++i], &len);
+			i++;
+			parse_flags(str, &i, &flags);
+			if (str[i] != '\0')
+			{
+				ft_check_with_flags(params, str[i], &flags, &len);
+				i++;
+			}
 		}
 		else
+		{
 			print_char(str[i], &len);
-		i++;
+			i++;
+		}
 	}
 	va_end(params);
 	return (len);
