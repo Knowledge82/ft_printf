@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned_with_flags.c                        :+:      :+:    :+:   */
+/*   print_unsigned_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdarsuye <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/23 12:47:09 by vdarsuye          #+#    #+#             */
-/*   Updated: 2025/11/23 13:38:34 by vdarsuye         ###   ########.fr       */
+/*   Created: 2025/11/24 17:43:26 by vdarsuye          #+#    #+#             */
+/*   Updated: 2025/11/24 17:43:30 by vdarsuye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	output_formatted_unsigned(char *num_str, int precision_padding,
 		print_str(num_str, len);
 		while(width_padding > 0)
 		{
-			print__char(' ', len);
+			print_char(' ', len);
 			width_padding--;
 		}
 	}
@@ -71,11 +71,11 @@ void	print_unsigned_with_flags(unsigned int n, t_flags *flags, int *len)
 	num_len = ft_strlen(num_str);
 	precision_padding = 0;
 	if (flags->has_prec && flags->precision > num_len)
-		precision_padding = flags_precision - num_len;
+		precision_padding = flags->precision - num_len;
 	content_len = precision_padding + num_len;
 	width_padding = 0;
 	if (flags->width > content_len)
-		width_padding = flags_width - content_len;
+		width_padding = flags->width - content_len;
 	output_formatted_unsigned(num_str, precision_padding,
 			width_padding, flags, len);
 	free(original_str);

@@ -6,7 +6,7 @@
 /*   By: vdarsuye <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 16:00:13 by vdarsuye          #+#    #+#             */
-/*   Updated: 2025/11/22 16:06:57 by vdarsuye         ###   ########.fr       */
+/*   Updated: 2025/11/24 16:00:23 by vdarsuye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ void	ft_check_with_flags(va_list params, char c, t_flags *flags, int *len)
 	if (c == 'c')
 		print_char_with_flags(va_arg(params, int), flags, len);
 	else if (c == 's')
-		print_str(va_arg(params, char *), len);
+		print_str_with_flags(va_arg(params, char *), flags, len);
 	else if (c == 'p')
-		print_pointer(va_arg(params, unsigned long), len);
+		print_pointer_with_flags(va_arg(params, unsigned long), flags, len);
 	else if (c == 'd' || c == 'i')
-		print_int(va_arg(params, int), len);
+		print_int_with_flags(va_arg(params, int), flags, len);
 	else if (c == 'u')
-		print_unsigned(va_arg(params, unsigned int), len);
+		print_unsigned_with_flags(va_arg(params, unsigned int), flags, len);
 	else if (c == 'x' || c == 'X')
-		print_hexa(va_arg(params, unsigned int), c, len);
+		print_hexa_with_flags(va_arg(params, unsigned int), c, flags, len);
 	else if (c == '%')
-		print_char('%', len);
+		print_char_with_flags('%', len);
 }
 
 int	ft_printf(const char *str, ...)
@@ -35,6 +35,7 @@ int	ft_printf(const char *str, ...)
 	int		len;
 	int		i;
 	va_list	params;
+	t_flags	flags;
 
 	va_start(params, str);
 	len = 0;

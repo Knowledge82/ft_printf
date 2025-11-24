@@ -6,7 +6,7 @@
 /*   By: vdarsuye <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:07:26 by vdarsuye          #+#    #+#             */
-/*   Updated: 2025/10/09 11:44:44 by vdarsuye         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:03:22 by vdarsuye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_itoa(int n);
+char		*ft_uitoa(unsigned int n);
+char		*ft_uitoa_hex(unsigned int n, char format);
+char		*ft_ultoa_hex(unsigned long n);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char		**ft_split(char const *str, char separ);
 long		ft_atol(const char *str);

@@ -6,7 +6,7 @@
 #    By: vdarsuye <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 15:32:43 by vdarsuye          #+#    #+#              #
-#    Updated: 2025/10/09 11:44:30 by vdarsuye         ###   ########.fr        #
+#    Updated: 2025/11/24 20:03:59 by vdarsuye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,13 @@ SRC = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
       ft_memcpy.c ft_strcat.c ft_strlcat.c ft_strcmp.c ft_strncmp.c \
       ft_memmove.c ft_memcmp.c ft_strchr.c ft_strrchr.c ft_strnstr.c \
       ft_memchr.c ft_atoi.c ft_calloc.c ft_substr.c ft_strjoin.c \
-      ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
+      ft_strtrim.c ft_split.c ft_ultoa_hex.c ft_uitoa_hex.c ft_uitoa.c ft_itoa.c \
       ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-	is_numeric_arg.c ft_atol.c ft_atoll.c ft_memset.c ft_strcpy.c \
-	ft_strlcpy.c ft_iswhitespace.c count_strings.c ft_strncpy.c \
-	get_next_line.c get_next_line_utils.c ft_realloc.c ft_free_array.c
+      is_numeric_arg.c ft_atol.c ft_atoll.c ft_memset.c ft_strcpy.c \
+      ft_strlcpy.c ft_iswhitespace.c count_strings.c ft_strncpy.c \
+      get_next_line.c get_next_line_utils.c ft_realloc.c ft_free_array.c \
+      ft_strmapi.c ft_striteri.c
+
 
 BONUS_SRC = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 	    ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
