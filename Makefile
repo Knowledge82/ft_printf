@@ -74,10 +74,12 @@ $(LIBFT):
 	@echo "$(GREEN)Libft DONE!$(RESET)"
 
 $(NAME): $(LIBFT) $(OBJS_MANDATORY)
+	@$(RM) $(NAME)
 	@$(AR) $(NAME) $(OBJS_MANDATORY)
 	@echo "$(NEON_GREEN)✓ Library $(NAME) DONE!$(RESET)"
 
 bonus: $(LIBFT) $(OBJS_COMMON) $(OBJS_BONUS)
+	@$(RM) $(NAME)
 	@$(AR) $(NAME) $(OBJS_COMMON) $(OBJS_BONUS)
 	@echo "$(NEON_GREEN)✓ Library $(NAME) with bonus DONE!$(RESET)"
 

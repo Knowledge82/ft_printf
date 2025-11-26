@@ -35,7 +35,12 @@ void	print_hexa_with_flags(unsigned int n, char format, t_flags *flags, int *len
 	int	width_padding;
 	int	content_len;
 
-	if (n == 0 && flags->has_prec && flags->precision == 0)
+	if (flags->no_flags)
+	{
+		print_hexa(n, format, len);
+		return ;
+	}
+	if (n == 0 && flags->has_prec == 1 && flags->precision == 0)
 		num_str = ft_strdup("");
 	else
 		num_str = ft_uitoa_hex(n, format);

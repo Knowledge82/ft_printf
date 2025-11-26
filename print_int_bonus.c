@@ -14,7 +14,7 @@
 
 static char	*convert_number_to_string(int n, t_flags *flags)
 {
-	if (n == 0 && flags->has_prec && flags->precision == 0)
+	if (n == 0 && flags->has_prec == 1 && flags->precision == 0)
 		return (ft_strdup(""));//edge case: %.0d with 0 = "". printf("%.0d", 0);
 	else
 		return (ft_itoa(n));
@@ -60,6 +60,11 @@ void	print_int_with_flags(int n, t_flags *flags, int *len)
 	int	width_padding;
 	int	content_len;
 
+	if (flags->no_flags)
+	{
+		print_int(n, len);
+		return ;
+	}
 	// convert num => str
 	num_str = convert_number_to_string(n, flags);
 	original_str = num_str;

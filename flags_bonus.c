@@ -16,6 +16,7 @@ static void	init_flags(t_flags *flags)
 {
 	ft_memset(flags, 0, sizeof(t_flags));
 	flags->has_prec = -1;
+	flags->no_flags = 1;
 }
 
 static int	is_flag(char c)
@@ -62,5 +63,11 @@ int	parse_flags(const char *str, int *i, t_flags *flags)
 	}
 	else
 		flags->precision = 0;
+	if (!flags->minus && !flags->zero && !flags->plus
+			&& !flags->space && !flags->hash
+			&& flags->width == 0 && flags->has_prec == -1)
+		flags->no_flags = 1;
+	else
+		flags->no_flags = 0;
 	return (*i);
 }

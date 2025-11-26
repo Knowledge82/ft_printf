@@ -28,6 +28,7 @@ typedef struct s_flags
 	int	plus;      // '+' знак всегда
 	int	space;     // ' ' пробел для положительных
 	int	has_prec;  // была ли указана точность
+	int	no_flags;
 }	t_flags;
 
 //prototypes

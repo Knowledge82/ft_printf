@@ -359,17 +359,17 @@ void test_bonus(void)
 
 	printf(BLUE "\n── %%d with precision ──\n" RESET);
 	
-	printf("%%. 5d                     → ");
+	printf("%%.5d                     → ");
 	ret1 = printf("%.5d", 42);
 	printf(" vs ");
-	ret2 = ft_printf("%. 5d", 42);
+	ret2 = ft_printf("%.5d", 42);
 	printf(" → ");
 	check_result(ret1, ret2);
 
 	printf("%%.0d zero                → ");
 	ret1 = printf("%.0d", 0);
 	printf(" vs ");
-	ret2 = ft_printf("%. 0d", 0);
+	ret2 = ft_printf("%.0d", 0);
 	printf(" → ");
 	check_result(ret1, ret2);
 

@@ -67,6 +67,11 @@ void	print_pointer_with_flags(unsigned long ptr, t_flags *flags, int *len)
 	int	ptr_len;
 	int	width_padding;
 
+	if (flags->no_flags)
+	{
+		print_pointer(ptr, len);
+		return ;
+	}
 	ptr_str = make_ptr_str(ptr);
 	if (!ptr_str)
 		return ;

@@ -17,6 +17,11 @@ void	print_char_with_flags(char c, t_flags *flags, int *len)
 {
 	int	padding;
 
+	if (flags->no_flags)
+	{
+		print_char(c, len);
+		return ;
+	}
 	padding = 0;//num of spaces for padding
 	if (flags->width > 1)
 		padding = flags->width - 1;

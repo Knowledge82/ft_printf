@@ -63,6 +63,11 @@ void	print_unsigned_with_flags(unsigned int n, t_flags *flags, int *len)
 	int	width_padding;
 	int	content_len;
 
+	if (flags->no_flags)
+	{
+		print_unsigned(n, len);
+		return ;
+	}
 	if (n == 0 && flags->has_prec && flags->precision == 0)
 		num_str = ft_strdup("");
 	else

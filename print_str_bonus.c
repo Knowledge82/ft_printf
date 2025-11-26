@@ -19,6 +19,11 @@ void	print_str_with_flags(char *str, t_flags *flags, int *len)
 	int	padding;
 	int	i;
 
+	if (flags->no_flags)
+	{
+		print_str(str, len);
+		return ;
+	}
 	if (!str)
 		str = "(null)";
 	str_len = ft_strlen(str);
