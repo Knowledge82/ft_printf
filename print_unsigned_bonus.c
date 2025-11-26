@@ -66,7 +66,7 @@ void	print_unsigned_with_flags(unsigned int n, t_flags *flags, int *len)
 	if (n == 0 && flags->has_prec && flags->precision == 0)
 		num_str = ft_strdup("");
 	else
-		num _str = ft_uitoa(n);
+		num_str = ft_uitoa(n);
 	original_str = num_str;
 	num_len = ft_strlen(num_str);
 	precision_padding = 0;

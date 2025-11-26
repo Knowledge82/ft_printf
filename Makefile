@@ -10,6 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+MAKEFLAGS += --no-print-directory
+
 #Colors
 RESET = \033[0m
 RED = \033[31m
@@ -35,35 +37,32 @@ LIBFT_DIR = ./libft
 #Libs
 LIBFT = $(LIBFT_DIR)/libft.a
 
+#Srcs files - Common
+SRCS_COMMON = print_char.c \
+			  print_str.c \
+			  print_int.c \
+			  print_unsigned.c \
+			  print_hexa.c \
+			  print_pointer.c
+
 #Srcs files - Mandatory
-SRCS = ft_printf.c \
-       print_char.c \
-       print_str.c \
-       print_int.c \
-       print_unsigned.c \
-       print_hexa.c \
-       print_pointer.c
+SRCS_MANDATORY = ft_printf.c
 
 #Srcs files - Bonus
 SRCS_BONUS = ft_printf_bonus.c \
-	    print_char.c \
-	    print_str.c \
-	    print_int.c \
-	    print_unsigned.c \
-	    print_hexa.c \
-	    print_pointer.c \
-	    flags_bonus.c \
-	    print_char_bonus.c \
-	    print_str_bonus.c \
-	    print_int_bonus.c \
-	    print_int_format_out.c \
-	    print_unsigned_bonus.c \
-	    print_hexa_bonus.c \
-	    print_hexa_format_out.c \
-	    print_pointer_bonus.c
+			 flags_bonus.c \
+			 print_char_bonus.c \
+			 print_str_bonus.c \
+			 print_int_bonus.c \
+			 print_int_format_out.c \
+			 print_unsigned_bonus.c \
+			 print_hexa_bonus.c \
+			 print_hexa_format_out.c \
+			 print_pointer_bonus.c
 
 #Objs files
-OBJS = $(SRCS:.c=.o)
+OBJS_COMMON = $(SRCS_COMMON:.c=.o)
+OBJS_MANDATORY = $(OBJS_COMMON) $(SRCS_MANDATORY:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 #Rules
@@ -74,12 +73,12 @@ $(LIBFT):
 	@make -C $(LIBFT_DIR)
 	@echo "$(GREEN)Libft DONE!$(RESET)"
 
-$(NAME): $(LIBFT) $(OBJS)
-	@$(AR) $(NAME) $(OBJS)
+$(NAME): $(LIBFT) $(OBJS_MANDATORY)
+	@$(AR) $(NAME) $(OBJS_MANDATORY)
 	@echo "$(NEON_GREEN)✓ Library $(NAME) DONE!$(RESET)"
 
-bonus: $(LIBFT) $(OBJS_BONUS)
-	@$(AR) $(NAME) $(OBJS_BONUS)
+bonus: $(LIBFT) $(OBJS_COMMON) $(OBJS_BONUS)
+	@$(AR) $(NAME) $(OBJS_COMMON) $(OBJS_BONUS)
 	@echo "$(NEON_GREEN)✓ Library $(NAME) with bonus DONE!$(RESET)"
 
 #Compiling object files
@@ -88,13 +87,15 @@ bonus: $(LIBFT) $(OBJS_BONUS)
 	@echo "$(BLUE)	Compiled: $<$(RESET)"
 
 clean :
-	@$(RM) $(OBJS) $(OBJS_BONUS)
+	@$(RM) $(OBJS_COMMON) $(OBJS_MANDATORY) $(OBJS_BONUS)
 	@make -C $(LIBFT_DIR) clean
 	@echo "$(CYAN)Object files removed$(RESET)"
 
-fclean : clean
+fclean :
+	@$(RM) $(OBJS_COMMON) $(OBJS_MANDATORY) $(OBJS_BONUS)
 	@$(RM) $(NAME)
-	@echo "$(CYAN)Library $(NAME) removed.$(RESET)"
+	@make -C $(LIBFT_DIR) fclean
+	@echo "$(CYAN)All cleaned$(RESET)"
 
 re : fclean all
 

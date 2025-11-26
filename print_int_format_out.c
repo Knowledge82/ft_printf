@@ -66,7 +66,7 @@ void	output_formatted_int(char *num_str, char sign, int prec_pad,
 {
 	if (flags->minus)
 		output_left_align(num_str, sign, prec_pad, width_pad, len);
-	else if (flags->zero && !flags->has_prec)
+	else if (flags->zero && flags->has_prec == -1)
 		output_zero_padding(num_str, sign, width_pad, len);
 	else
 		output_right_align(num_str, sign, prec_pad, width_pad, len);

@@ -22,7 +22,7 @@ void	print_str_with_flags(char *str, t_flags *flags, int *len)
 	if (!str)
 		str = "(null)";
 	str_len = ft_strlen(str);
-	if (flags->has_prec && flags->precision < str_len)
+	if (flags->has_prec == 1 && flags->precision < str_len)
 		str_len = flags->precision;
 	padding = 0;
 	if (flags->width > str_len)

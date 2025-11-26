@@ -13,7 +13,7 @@
 #include "ft_printf.h"
 
 // for %c works flag '-' and width
-void	printf_char_with_flags(char c, t_flags *flags, int *len)
+void	print_char_with_flags(char c, t_flags *flags, int *len)
 {
 	int	padding;
 

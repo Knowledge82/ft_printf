@@ -27,7 +27,7 @@ void	ft_check_with_flags(va_list params, char c, t_flags *flags, int *len)
 	else if (c == 'x' || c == 'X')
 		print_hexa_with_flags(va_arg(params, unsigned int), c, flags, len);
 	else if (c == '%')
-		print_char_with_flags('%', len);
+		print_char('%', len);
 }
 
 int	ft_printf(const char *str, ...)
