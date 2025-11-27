@@ -37,11 +37,13 @@ typedef struct s_padding
 	int	width;
 }	t_padding;
 
-typedef struct s_hex_str
+typedef struct s_num_str
 {
-	char	*num_str;
+	char	*original_str;
+	char	*num;
 	char	*prefix;
-}	t_hex_str;
+	char	sign;
+}	t_num_str;
 
 //prototypes
 int		ft_printf(const char *str, ...);
@@ -60,13 +62,11 @@ void	ft_check_with_flags(va_list params, char c, t_flags *flags, int *len);
 void	print_char_with_flags(char c, t_flags *flags, int *len);
 void	print_hexa_with_flags(unsigned int n, char format,
 			t_flags *flags, int *len);
-void	output_formatted_hex(char *num_str, char *prefix, int prec_pad,
-			int width_pad, t_flags *flags, int *len);
 void	print_int_with_flags(int n, t_flags *flags, int *len);
-void	output_formatted_int(char *num_str, char sign, int prec_pad,
-			int width_pad, t_flags *flags, int *len);
 void	print_str_with_flags(char *str, t_flags *flags, int *len);
 void	print_unsigned_with_flags(unsigned int n, t_flags *flags, int *len);
 void	print_pointer_with_flags(unsigned long ptr, t_flags *flags, int *len);
+void	output_formatted(t_num_str str, t_padding pad,
+			t_flags *flags, int *len);
 
 #endif

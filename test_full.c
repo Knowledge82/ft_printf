@@ -442,10 +442,7 @@ void print_summary(void)
 	printf("\n");
 	
 	if (g_failed == 0)
-	{
 		printf(GREEN "  🎉 ALL TESTS PASSED! 🎉\n" RESET);
-		printf(GREEN "  Молодец, Валерка! 💪🔥\n" RESET);
-	}
 	else
 	{
 		printf(RED "  ⚠️  %d test(s) failed\n" RESET, g_failed);
@@ -457,7 +454,6 @@ void print_summary(void)
 int main(void)
 {
 	setbuf(stdout, NULL);
-
 	printf(MAGENTA "\n");
 	printf("════════════════════════════════════════════\n");
 	printf("     FT_PRINTF COMPLETE TEST SUITE\n");

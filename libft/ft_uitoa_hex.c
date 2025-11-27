@@ -29,9 +29,9 @@ static int	count_hex_digits(unsigned int n)
 
 char	*ft_uitoa_hex(unsigned int n, char format)
 {
+	size_t	len;
 	char	*base;
 	char	*str;
-	size_t	len;
 
 	if (format == 'x')
 		base = "0123456789abcdef";

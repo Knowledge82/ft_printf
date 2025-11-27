@@ -11,8 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-// for %s works width, precision(max symbols), flag '-'(align left)
-// precision in this case is "cut the string"
+
 void	print_str_with_flags(char *str, t_flags *flags, int *len)
 {
 	int	str_len;
@@ -20,10 +19,7 @@ void	print_str_with_flags(char *str, t_flags *flags, int *len)
 	int	i;
 
 	if (flags->no_flags)
-	{
-		print_str(str, len);
-		return ;
-	}
+		return (print_str(str, len));
 	if (!str)
 		str = "(null)";
 	str_len = ft_strlen(str);
@@ -32,20 +28,13 @@ void	print_str_with_flags(char *str, t_flags *flags, int *len)
 	padding = 0;
 	if (flags->width > str_len)
 		padding = flags->width - str_len;
-	if (flags->minus)//align left
-	{
-		i = 0;
-		while (i < str_len)
-			print_char(str[i++], len);
+	if (!flags->minus)
 		while (padding-- > 0)
 			print_char(' ', len);
-	}
-	else
-	{
+	i = 0;
+	while (i < str_len)
+		print_char(str[i++], len);
+	if (flags->minus)
 		while (padding-- > 0)
 			print_char(' ', len);
-		i = 0;
-		while (i < str_len)
-			print_char(str[i++], len);
-	}
 }

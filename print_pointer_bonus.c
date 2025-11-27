@@ -12,35 +12,13 @@
 
 #include "ft_printf.h"
 
-static void	output_left_align(char *ptr_str, int width_padding, int *len)
-{
-	print_str(ptr_str, len);
-	while (width_padding > 0)
-	{
-		print_char(' ', len);
-		width_padding--;
-	}
-}
-
-static void	output_right_align(char *ptr_str, int width_padding, int *len)
-{
-	while (width_padding > 0)
-	{
-		print_char(' ', len);
-		width_padding--;
-	}
-	print_str(ptr_str, len);
-}
-
-static char	*make_ptr_str(unsigned long ptr)
+static char	*convert_ptr_to_hex(unsigned long ptr)
 {
 	char	*total_str;
 	char	*hex_str;
-	int	hex_len;
-	int	i;
+	int		hex_len;
+	int		i;
 
-	if (ptr == 0)
-		return (ft_strdup("(nil)"));
 	hex_str = ft_ultoa_hex(ptr);
 	if (!hex_str)
 		return (NULL);
@@ -61,27 +39,42 @@ static char	*make_ptr_str(unsigned long ptr)
 	return (total_str);
 }
 
+static t_num_str	make_ptr_string(unsigned long ptr)
+{
+	t_num_str	str;
+
+	if (ptr == 0)
+		str.original_str = ft_strdup("(nil)");
+	else
+		str.original_str = convert_ptr_to_hex(ptr);
+	str.num = str.original_str;
+	str.sign = '\0';
+	str.prefix = NULL;
+	return (str);
+}
+
+static t_padding	calculate_ptr_padding(t_flags *flags, int ptr_len)
+{
+	t_padding	pad;
+
+	pad.precision = 0;
+	pad.width = 0;
+	if (flags->width > ptr_len)
+		pad.width = flags->width - ptr_len;
+	return (pad);
+}
+
 void	print_pointer_with_flags(unsigned long ptr, t_flags *flags, int *len)
 {
-	char	*ptr_str;
-	int	ptr_len;
-	int	width_padding;
+	t_num_str	str;
+	t_padding	pad;
 
 	if (flags->no_flags)
-	{
-		print_pointer(ptr, len);
+		return (print_pointer(ptr, len));
+	str = make_ptr_string(ptr);
+	if (!str.original_str)
 		return ;
-	}
-	ptr_str = make_ptr_str(ptr);
-	if (!ptr_str)
-		return ;
-	ptr_len = ft_strlen(ptr_str);
-	width_padding = 0;
-	if (flags->width > ptr_len)
-		width_padding = flags->width - ptr_len;
-	if (flags->minus)
-		output_left_align(ptr_str, width_padding, len);
-	else
-		output_right_align(ptr_str, width_padding, len);
-	free(ptr_str);
+	pad = calculate_ptr_padding(flags, ft_strlen(str.num));
+	output_formatted(str, pad, flags, len);
+	free(str.original_str);
 }

@@ -24,12 +24,22 @@ static char	*get_prefix(unsigned int n, char format, t_flags *flags)
 	return ("");
 }
 
-static char	*make_hex_string(unsigned int n, char format, t_flags *flags)
+static char	*convert_hex_to_str(unsigned int n, char format, t_flags *flags)
 {
 	if (n == 0 && flags->has_prec == 1 && flags->precision == 0)
 		return (ft_strdup(""));
-	else
-		return (ft_uitoa_hex(n, format));
+	return (ft_uitoa_hex(n, format));
+}
+
+static t_num_str	make_hex_string(unsigned int n, char format, t_flags *flags)
+{
+	t_num_str	str;
+
+	str.original_str = convert_hex_to_str(n, format, flags);
+	str.num = str.original_str;
+	str.prefix = get_prefix(n, format, flags);
+	str.sign = '\0';
+	return (str);
 }
 
 static t_padding	calculate_hex_padding(t_flags *flags, int num_len,
@@ -51,17 +61,14 @@ static t_padding	calculate_hex_padding(t_flags *flags, int num_len,
 void	print_hexa_with_flags(unsigned int n, char format,
 		t_flags *flags, int *len)
 {
+	t_num_str	str;
 	t_padding	pad;
-	t_hex_str	str;
-	char		*original_str;
 
 	if (flags->no_flags)
 		return (print_hexa(n, format, len));
-	str.num_str = make_hex_string(n, format, len);
-	original_str = str.num_str;
-	str.prefix = get_prefix(n, format, flags);
-	pad = calculate_hex_padding(flags, ft_strlen(str.num_str),
+	str = make_hex_string(n, format, flags);
+	pad = calculate_hex_padding(flags, ft_strlen(str.num),
 			ft_strlen(str.prefix));
-	output_formatted_hex(str, pad, flags, len);
-	free(original_str);
+	output_formatted(str, pad, flags, len);
+	free(str.original_str);
 }

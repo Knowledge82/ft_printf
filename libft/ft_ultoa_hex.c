@@ -31,7 +31,7 @@ char	*ft_ultoa_hex(unsigned long n)
 {
 	char	*str;
 	char	*base;
-	int	len;
+	int		len;
 
 	base = "0123456789abcdef";
 	len = count_long_digits_hex(n);

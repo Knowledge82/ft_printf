@@ -55,11 +55,10 @@ SRCS_BONUS = ft_printf_bonus.c \
 			 print_char_bonus.c \
 			 print_str_bonus.c \
 			 print_int_bonus.c \
-			 print_int_format_out.c \
 			 print_unsigned_bonus.c \
 			 print_hexa_bonus.c \
-			 print_hexa_format_out.c \
-			 print_pointer_bonus.c
+			 print_pointer_bonus.c \
+			 output_formatted.c
 
 #Objs files
 OBJS_COMMON = $(SRCS_COMMON:.c=.o)
