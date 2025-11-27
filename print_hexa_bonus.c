@@ -24,37 +24,44 @@ static char	*get_prefix(unsigned int n, char format, t_flags *flags)
 	return ("");
 }
 
-void	print_hexa_with_flags(unsigned int n, char format, t_flags *flags, int *len)
+static char	*make_hex_string(unsigned int n, char format, t_flags *flags)
 {
-	char	*num_str;
-	char	*original_str;
-	char	*prefix;
-	int	num_len;
-	int	prefix_len;
-	int	precision_padding;
-	int	width_padding;
-	int	content_len;
+	if (n == 0 && flags->has_prec == 1 && flags->precision == 0)
+		return (ft_strdup(""));
+	else
+		return (ft_uitoa_hex(n, format));
+}
+
+static t_padding	calculate_hex_padding(t_flags *flags, int num_len,
+		int prefix_len)
+{
+	t_padding	pad;
+	int			content_len;
+
+	pad.precision = 0;
+	if (flags->has_prec == 1 && flags->precision > num_len)
+		pad.precision = flags->precision - num_len;
+	content_len = prefix_len + pad.precision + num_len;
+	pad.width = 0;
+	if (flags->width > content_len)
+		pad.width = flags->width - content_len;
+	return (pad);
+}
+
+void	print_hexa_with_flags(unsigned int n, char format,
+		t_flags *flags, int *len)
+{
+	t_padding	pad;
+	t_hex_str	str;
+	char		*original_str;
 
 	if (flags->no_flags)
-	{
-		print_hexa(n, format, len);
-		return ;
-	}
-	if (n == 0 && flags->has_prec == 1 && flags->precision == 0)
-		num_str = ft_strdup("");
-	else
-		num_str = ft_uitoa_hex(n, format);
-	original_str = num_str;
-	prefix = get_prefix(n, format, flags);
-	prefix_len = ft_strlen(prefix);
-	num_len = ft_strlen(num_str);
-	precision_padding = 0;
-	if (flags->has_prec && flags->precision > num_len)
-		precision_padding = flags->precision - num_len;
-	content_len = prefix_len + precision_padding + num_len;
-	width_padding = 0;
-	if (flags->width > content_len)
-		width_padding = flags->width - content_len;
-	output_formatted_hex(num_str, prefix, precision_padding, width_padding, flags, len);
+		return (print_hexa(n, format, len));
+	str.num_str = make_hex_string(n, format, len);
+	original_str = str.num_str;
+	str.prefix = get_prefix(n, format, flags);
+	pad = calculate_hex_padding(flags, ft_strlen(str.num_str),
+			ft_strlen(str.prefix));
+	output_formatted_hex(str, pad, flags, len);
 	free(original_str);
 }

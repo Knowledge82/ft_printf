@@ -43,7 +43,7 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			if (str[i + 1] != '\0')// тут где-то parse_flags
+			if (str[i + 1] != '\0')
 				ft_check(params, str[++i], &len);
 		}
 		else

@@ -12,59 +12,56 @@
 
 #include "ft_printf.h"
 
-static void	output_left_align(char *num_str, char *prefix,
-		int prec_pad, int width_pad, int *len)
+static void	output_left_align(t_hex_str str, t_padding pad, int *len)
 {
 	print_str(prefix, len);
-	while (prec_pad > 0)
+	while (pad.precision > 0)
 	{
 		print_char('0', len);
-		prec_pad--;
+		pad.precision--;
 	}
 	print_str(num_str, len);
-	while (width_pad > 0)
+	while (pad.width > 0)
 	{
 		print_char(' ', len);
-		width_pad--;
+		pad.width--;
 	}
 }
 
-static void	output_zero_padding(char *num_str, char *prefix,
-		int width_pad, int *len)
+static void	output_zero_padding(t_hex_str str, t_padding pad, int *len)
 {
 	print_str(prefix, len);
-	while (width_pad > 0)
+	while (pad.width > 0)
 	{
 		print_char('0', len);
-		width_pad--;
+		pad.width--;
 	}
 	print_str(num_str, len);
 }
 
-static void	output_right_align(char *num_str, char *prefix,
-		int prec_pad, int width_pad, int *len)
+static void	output_right_align(t_hex_str str, t_padding pad, int *len)
 {
-	while (width_pad > 0)
+	while (pad.width > 0)
 	{
 		print_char(' ', len);
-		width_pad--;
+		pad.width--;
 	}
 	print_str(prefix, len);
-	while (prec_pad > 0)
+	while (pad.precision > 0)
 	{
 		print_char('0', len);
-		prec_pad--;
+		pad.precision--;
 	}
 	print_str(num_str, len);
 }
 
-void	output_formatted_hex(char *num_str, char *prefix, int prec_pad,
-		int width_pad, t_flags *flags, int *len)
+void	output_formatted_hex(t_hex_str str, t_padding pad,
+			t_flags *flags, int *len)
 {
 	if (flags->minus)
-		output_left_align(num_str, prefix, prec_pad, width_pad, len);
+		output_left_align(str, pad, len);
 	else if (flags->zero && flags->has_prec == -1)
-		output_zero_padding(num_str, prefix, width_pad, len);
+		output_zero_padding(str, pad, len);
 	else
-		output_right_align(num_str, prefix, prec_pad, width_pad, len);
+		output_right_align(str, pad, len);
 }

@@ -45,18 +45,12 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			i++;
-			parse_flags(str, &i, &flags);
+			handle_flags(str, &i, &flags);
 			if (str[i] != '\0')
-			{
-				ft_check_with_flags(params, str[i], &flags, &len);
-				i++;
-			}
+				ft_check_with_flags(params, str[i++], &flags, &len);
 		}
 		else
-		{
-			print_char(str[i], &len);
-			i++;
-		}
+			print_char(str[i++], &len);
 	}
 	va_end(params);
 	return (len);

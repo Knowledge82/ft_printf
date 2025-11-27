@@ -12,25 +12,9 @@
 
 #include "ft_printf.h"
 
-static void	init_flags(t_flags *flags)
+static void	parse_flags(const char *str, int *i, t_flags *flags)
 {
-	ft_memset(flags, 0, sizeof(t_flags));
-	flags->has_prec = -1;
-	flags->no_flags = 1;
-}
-
-static int	is_flag(char c)
-{
-	return (c == '-' || c == '0' || c == '#'
-		|| c == '+' || c == ' ');
-}
-
-// формат строки после %:    %[flags][width][.precision]conversion
-int	parse_flags(const char *str, int *i, t_flags *flags)
-{
-	init_flags(flags);
-
-	while (str[*i] && is_flag(str[*i]))//флаг
+	while (str[*i] && is_flag(str[*i]))
 	{
 		if (str[*i] == '-')
 			flags->minus = 1;
@@ -44,13 +28,21 @@ int	parse_flags(const char *str, int *i, t_flags *flags)
 			flags->space = 1;
 		(*i)++;
 	}
-	if (ft_isdigit(str[*i]))//ширина
+}
+
+static void	parse_width(const char *str, int *i, t_flags *flags)
+{
+	if (ft_isdigit(str[*i]))
 	{
-		flags->width = ft_atoi(&str[*i]);// передаём строку от i и дальше
-		while (ft_isdigit(str[*i]))//atoi парсит все цифры, поэтому вручную пропускаем
+		flags->width = ft_atoi(&str[*i]);
+		while (ft_isdigit(str[*i]))
 			(*i)++;
 	}
-	if (str[*i] == '.')//точность
+}
+
+static void	parse_precision(const char *str, int *i, t_flags *flags)
+{
+	if (str[*i] == '.')
 	{
 		flags->has_prec = 1;
 		(*i)++;
@@ -63,11 +55,24 @@ int	parse_flags(const char *str, int *i, t_flags *flags)
 	}
 	else
 		flags->precision = 0;
+}
+
+static void	check_no_flags(t_flags *flags)
+{
 	if (!flags->minus && !flags->zero && !flags->plus
-			&& !flags->space && !flags->hash
-			&& flags->width == 0 && flags->has_prec == -1)
+		&& !flags->space && !flags->hash
+		&& flags->width == 0 && flags->has_prec == -1)
 		flags->no_flags = 1;
 	else
 		flags->no_flags = 0;
+}
+
+int	handle_flags(const char *str, int *i, t_flags *flags)
+{
+	init_flags(flags);
+	parse_flags(str, i, flags);
+	parse_width(str, i, flags);
+	parse_precision(str, i, flags);
+	check_no_flags(flags);
 	return (*i);
 }

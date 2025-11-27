@@ -12,7 +12,6 @@
 
 #include "ft_printf.h"
 
-// for %c works flag '-' and width
 void	print_char_with_flags(char c, t_flags *flags, int *len)
 {
 	int	padding;
@@ -22,16 +21,16 @@ void	print_char_with_flags(char c, t_flags *flags, int *len)
 		print_char(c, len);
 		return ;
 	}
-	padding = 0;//num of spaces for padding
+	padding = 0;
 	if (flags->width > 1)
 		padding = flags->width - 1;
-	if (flags->minus)//align left
+	if (flags->minus)
 	{
 		print_char(c, len);
 		while (padding-- > 0)
 			print_char(' ', len);
 	}
-	else//align right
+	else
 	{
 		while (padding-- > 0)
 			print_char(' ', len);

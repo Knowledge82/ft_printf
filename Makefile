@@ -51,6 +51,7 @@ SRCS_MANDATORY = ft_printf.c
 #Srcs files - Bonus
 SRCS_BONUS = ft_printf_bonus.c \
 			 flags_bonus.c \
+			 flags_utils_bonus.c \
 			 print_char_bonus.c \
 			 print_str_bonus.c \
 			 print_int_bonus.c \

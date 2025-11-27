@@ -20,16 +20,28 @@
 // %[flags][width][.precision]conversion
 typedef struct s_flags
 {
-	int	minus;     // '-' выравнивание влево
-	int	zero;      // '0' заполнение нулями
-	int	width;     // минимальная ширина поля
-	int	precision; // точность (.число)
-	int	hash;      // '#' альтернативная форма
-	int	plus;      // '+' знак всегда
-	int	space;     // ' ' пробел для положительных
-	int	has_prec;  // была ли указана точность
+	int	minus;// '-' выравнивание влево
+	int	zero;// '0' заполнение нулями
+	int	width;// минимальная ширина поля
+	int	precision;// точность (.число)
+	int	hash;// '#' альтернативная форма
+	int	plus;// '+' знак всегда
+	int	space;// ' ' пробел для положительных
+	int	has_prec;// была ли указана точность
 	int	no_flags;
 }	t_flags;
+
+typedef struct s_padding
+{
+	int	precision;
+	int	width;
+}	t_padding;
+
+typedef struct s_hex_str
+{
+	char	*num_str;
+	char	*prefix;
+}	t_hex_str;
 
 //prototypes
 int		ft_printf(const char *str, ...);
@@ -39,18 +51,22 @@ void	print_int(int nb, int *len);
 void	print_unsigned(unsigned int nb, int *len);
 void	print_hexa(unsigned int nb, const char c, int *len);
 void	print_pointer(unsigned long ptr, int *len);
+
 //bonus
-int		parse_flags(const char *str, int *i, t_flags *flags);
+void	init_flags(t_flags *flags);
+int		is_flag(char c);
+int		handle_flags(const char *str, int *i, t_flags *flags);
 void	ft_check_with_flags(va_list params, char c, t_flags *flags, int *len);
 void	print_char_with_flags(char c, t_flags *flags, int *len);
-void	print_hexa_with_flags(unsigned int n, char format, t_flags *flags, int *len);
+void	print_hexa_with_flags(unsigned int n, char format,
+			t_flags *flags, int *len);
 void	output_formatted_hex(char *num_str, char *prefix, int prec_pad,
-		int width_pad, t_flags *flags, int *len);
+			int width_pad, t_flags *flags, int *len);
 void	print_int_with_flags(int n, t_flags *flags, int *len);
 void	output_formatted_int(char *num_str, char sign, int prec_pad,
-                int width_pad, t_flags *flags, int *len);
+			int width_pad, t_flags *flags, int *len);
 void	print_str_with_flags(char *str, t_flags *flags, int *len);
 void	print_unsigned_with_flags(unsigned int n, t_flags *flags, int *len);
-void    print_pointer_with_flags(unsigned long ptr, t_flags *flags, int *len);
+void	print_pointer_with_flags(unsigned long ptr, t_flags *flags, int *len);
 
 #endif
