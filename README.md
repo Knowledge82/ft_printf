@@ -722,29 +722,6 @@ ft_printf("%#-10x", 255);    // → "0xff      "
 
 ---
 
-## 🛠️ Herramientas de testing recomendadas
-
-- **[printfTester](https://github. com/Tripouille/printfTester)** - Testing exhaustivo con casos edge
-- **[ft_printf_tester](https://github. com/paulo-santana/ft_printf_tester)** - Comparación directa con printf original  
-- **[pft](https://github.com/gavinfielder/pft)** - Suite de tests completa
-
-### Comando de testing básico
-
-```bash
-# Compilar con debugging
-make re && gcc -Wall -Wextra -Werror -g main.c -L. -lftprintf -o test
-
-# Ejecutar con valgrind
-valgrind --leak-check=full ./test
-
-# Comparar outputs
-./test > yours.txt
-./test_original > original.txt
-diff yours.txt original.txt
-```
-
----
-
 ## 💡 Tips de implementación
 
 ### Parsing de flags
@@ -771,35 +748,6 @@ typedef struct s_flags
 5. **Aplicar flags según prioridad**
 6. **Generar output** con padding apropiado
 
-### Gestión de padding
-
-```c
-// Ejemplo conceptual (no normativo)
-int total_width = calculate_total_width(flags, content);
-int padding = flags.width - total_width;
-
-if (flags.minus)
-    print_content_then_padding(content, padding);
-else
-    print_padding_then_content(padding, content);
-```
-
----
-
-## ✅ Checklist de validación
-
-- [ ] Todos los flags funcionan individualmente
-- [ ] Combinaciones de flags respetan prioridades
-- [ ] Casos edge: `0`, `NULL`, valores negativos, `INT_MIN`/`INT_MAX`
-- [ ] Precisión 0 con valor 0 imprime string vacío
-- [ ] Flag `#` no añade prefijo a cero en hexadecimal
-- [ ] Flag `+` prevalece sobre espacio
-- [ ] Flag `-` prevalece sobre `0`
-- [ ] Valor de retorno correcto (cuenta todos los caracteres impresos)
-- [ ] Sin leaks de memoria (valgrind clean)
-- [ ] Norminette passing
-
----
 
 <div align="center">
 
