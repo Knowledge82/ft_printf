@@ -6,7 +6,7 @@
 #    By: vdarsuye <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 14:29:48 by vdarsuye          #+#    #+#              #
-#    Updated: 2025/11/24 21:53:55 by vdarsuye         ###   ########.fr        #
+#    Updated: 2025/11/29 13:53:39 by vdarsuye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = rm -f
+BONUS_FLAG = .bonus
 
 #Dirs
 LIBFT_DIR = ./libft
@@ -75,12 +76,18 @@ $(LIBFT):
 
 $(NAME): $(LIBFT) $(OBJS_MANDATORY)
 	@$(RM) $(NAME)
+	@$(RM) $(BONUS_FLAG)
+	@cp $(LIBFT) $(NAME)
 	@$(AR) $(NAME) $(OBJS_MANDATORY)
 	@echo "$(NEON_GREEN)✓ Library $(NAME) DONE!$(RESET)"
 
-bonus: $(LIBFT) $(OBJS_COMMON) $(OBJS_BONUS)
+bonus: $(BONUS_FLAG)
+	
+$(BONUS_FLAG): $(LIBFT) $(OBJS_COMMON) $(OBJS_BONUS)
 	@$(RM) $(NAME)
+	@cp $(LIBFT) $(NAME)
 	@$(AR) $(NAME) $(OBJS_COMMON) $(OBJS_BONUS)
+	@touch $(BONUS_FLAG)
 	@echo "$(NEON_GREEN)✓ Library $(NAME) with bonus DONE!$(RESET)"
 
 #Compiling object files
@@ -90,12 +97,14 @@ bonus: $(LIBFT) $(OBJS_COMMON) $(OBJS_BONUS)
 
 clean :
 	@$(RM) $(OBJS_COMMON) $(OBJS_MANDATORY) $(OBJS_BONUS)
+	@$(RM) $(BONUS_FLAG)
 	@make -C $(LIBFT_DIR) clean
 	@echo "$(CYAN)Object files removed$(RESET)"
 
 fclean :
 	@$(RM) $(OBJS_COMMON) $(OBJS_MANDATORY) $(OBJS_BONUS)
 	@$(RM) $(NAME)
+	@$(RM) $(BONUS_FLAG)
 	@make -C $(LIBFT_DIR) fclean
 	@echo "$(CYAN)All cleaned$(RESET)"
 
